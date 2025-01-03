@@ -10,7 +10,7 @@ require (
 	github.com/spf13/pflag v1.0.5
 	go.mongodb.org/mongo-driver v1.17.1
 	golang.org/x/crypto v0.31.0
-	golang.org/x/exp v0.0.0-20240823005443-9b4947da3948
+	golang.org/x/exp v0.0.0-20250103183323-7d7fa50e5329
 	k8s.io/api v0.31.3
 	k8s.io/apimachinery v0.31.4
 	k8s.io/client-go v0.31.3
