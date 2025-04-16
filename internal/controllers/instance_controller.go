@@ -126,7 +126,7 @@ func (r *GrowthbookInstanceReconciler) SetupWithManager(mgr ctrl.Manager, opts G
 				return keys
 			}
 
-			err = r.Client.List(context.TODO(), &users, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
+			err = r.List(context.TODO(), &users, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
 			if err != nil {
 				return keys
 			}
@@ -145,7 +145,7 @@ func (r *GrowthbookInstanceReconciler) SetupWithManager(mgr ctrl.Manager, opts G
 				return keys
 			}
 
-			err = r.Client.List(context.TODO(), &clients, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
+			err = r.List(context.TODO(), &clients, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
 			if err != nil {
 				return keys
 			}
@@ -236,7 +236,7 @@ func (r *GrowthbookInstanceReconciler) Reconcile(ctx context.Context, req ctrl.R
 	// Fetch the GrowthbookInstance instance
 	instance := v1beta1.GrowthbookInstance{}
 
-	err := r.Client.Get(ctx, req.NamespacedName, &instance)
+	err := r.Get(ctx, req.NamespacedName, &instance)
 	if err != nil {
 		if apierrors.IsNotFound(err) {
 			// Request object not found, could have been deleted after reconcile request.
@@ -377,7 +377,7 @@ func (r *GrowthbookInstanceReconciler) reconcileOrganizations(ctx context.Contex
 		return instance, nil, err
 	}
 
-	err = r.Client.List(ctx, &orgs, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
+	err = r.List(ctx, &orgs, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
 	if err != nil {
 		return instance, nil, err
 	}
@@ -405,7 +405,7 @@ func (r *GrowthbookInstanceReconciler) reconcileOrganizations(ctx context.Contex
 				return instance, nil, err
 			}
 
-			err = r.Client.List(ctx, &users, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
+			err = r.List(ctx, &users, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
 			if err != nil {
 				return instance, nil, err
 			}
@@ -454,7 +454,7 @@ func (r *GrowthbookInstanceReconciler) reconcileFeatures(ctx context.Context, in
 	req, _ := instanceSelector.Requirements()
 	selector.Add(req...)
 
-	err = r.Client.List(ctx, &features, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
+	err = r.List(ctx, &features, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
 	if err != nil {
 		return instance, err
 	}
@@ -530,7 +530,7 @@ func (r *GrowthbookInstanceReconciler) reconcileUsers(ctx context.Context, insta
 		return instance, err
 	}
 
-	err = r.Client.List(ctx, &users, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
+	err = r.List(ctx, &users, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
 	if err != nil {
 		return instance, err
 	}
@@ -601,7 +601,7 @@ func (r *GrowthbookInstanceReconciler) reconcileClients(ctx context.Context, ins
 	req, _ := instanceSelector.Requirements()
 	selector.Add(req...)
 
-	err = r.Client.List(ctx, &clients, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
+	err = r.List(ctx, &clients, client.InNamespace(instance.Namespace), client.MatchingLabelsSelector{Selector: selector})
 	if err != nil {
 		return instance, err
 	}
@@ -659,7 +659,7 @@ func (r *GrowthbookInstanceReconciler) reconcileClients(ctx context.Context, ins
 
 func (r *GrowthbookInstanceReconciler) getSecret(ctx context.Context, ref types.NamespacedName) (*corev1.Secret, error) {
 	secret := &corev1.Secret{}
-	err := r.Client.Get(ctx, ref, secret)
+	err := r.Get(ctx, ref, secret)
 
 	if err != nil {
 		return nil, fmt.Errorf("referencing secret was not found: %w", err)
@@ -780,21 +780,21 @@ func (r *GrowthbookInstanceReconciler) patch(ctx context.Context, obj *metav1.Pa
 		TypeMeta: obj.TypeMeta,
 	}
 
-	if err := r.Client.Get(ctx, key, latest); err != nil {
+	if err := r.Get(ctx, key, latest); err != nil {
 		return err
 	}
 
-	return r.Client.Patch(ctx, obj, client.MergeFrom(latest))
+	return r.Patch(ctx, obj, client.MergeFrom(latest))
 }
 
 func (r *GrowthbookInstanceReconciler) patchStatus(ctx context.Context, instance *v1beta1.GrowthbookInstance) error {
 	key := client.ObjectKeyFromObject(instance)
 	latest := &v1beta1.GrowthbookInstance{}
-	if err := r.Client.Get(ctx, key, latest); err != nil {
+	if err := r.Get(ctx, key, latest); err != nil {
 		return err
 	}
 
-	return r.Client.Status().Patch(ctx, instance, client.MergeFrom(latest))
+	return r.Status().Patch(ctx, instance, client.MergeFrom(latest))
 }
 
 // objectKey returns client.ObjectKey for the object.
