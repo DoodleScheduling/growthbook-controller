@@ -3,7 +3,7 @@ module github.com/DoodleScheduling/growthbook-controller
 go 1.22.0
 
 require (
-	github.com/fluxcd/pkg/runtime v0.49.1
+	github.com/fluxcd/pkg/runtime v0.58.0
 	github.com/go-logr/logr v1.4.2
 	github.com/onsi/ginkgo/v2 v2.22.2
 	github.com/onsi/gomega v1.36.2
