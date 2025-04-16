@@ -163,5 +163,5 @@ func generateKey(prefix string, n int) (string, error) {
 	}
 
 	e := base64.StdEncoding.EncodeToString(b)
-	return prefix + strings.Replace(strings.Replace(strings.Replace(e, "=", "", -1), "/", "", -1), "+", "", -1), nil
+	return prefix + strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(e, "=", ""), "/", ""), "+", ""), nil
 }
