@@ -3,7 +3,7 @@ module github.com/DoodleScheduling/growthbook-controller
 go 1.24.2
 
 require (
-	github.com/fluxcd/pkg/runtime v0.67.0
+	github.com/fluxcd/pkg/runtime v0.69.0
 	github.com/go-logr/logr v1.4.3
 	github.com/onsi/ginkgo/v2 v2.23.4
 	github.com/onsi/gomega v1.37.0
@@ -31,7 +31,7 @@ require (
 	github.com/evanphx/json-patch/v5 v5.9.11 // indirect
 	github.com/exponent-io/jsonpath v0.0.0-20210407135951-1de76d718b3f // indirect
 	github.com/fluxcd/cli-utils v0.36.0-flux.14 // indirect
-	github.com/fluxcd/pkg/apis/meta v1.15.0 // indirect
+	github.com/fluxcd/pkg/apis/meta v1.17.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.8.0 // indirect
 	github.com/go-errors/errors v1.5.1 // indirect
