@@ -7,7 +7,7 @@ require (
 	github.com/go-logr/logr v1.4.3
 	github.com/onsi/ginkgo/v2 v2.23.4
 	github.com/onsi/gomega v1.37.0
-	github.com/spf13/pflag v1.0.6
+	github.com/spf13/pflag v1.0.7
 	go.mongodb.org/mongo-driver v1.17.4
 	golang.org/x/crypto v0.40.0
 	golang.org/x/exp v0.0.0-20250408133849-7e4ce0ab07d0
