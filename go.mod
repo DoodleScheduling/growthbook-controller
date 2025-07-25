@@ -6,7 +6,7 @@ require (
 	github.com/fluxcd/pkg/runtime v0.75.0
 	github.com/go-logr/logr v1.4.3
 	github.com/onsi/ginkgo/v2 v2.23.4
-	github.com/onsi/gomega v1.37.0
+	github.com/onsi/gomega v1.38.0
 	github.com/spf13/pflag v1.0.7
 	go.mongodb.org/mongo-driver v1.17.4
 	golang.org/x/crypto v0.40.0
