@@ -19,7 +19,7 @@ jobs:
         egress-policy: audit
 
     - name: Scan for vulnerabilities
-      uses: aquasecurity/trivy-action@e368e328979b113139d6f9068e03accaed98a518 # 0.34.1
+      uses: aquasecurity/trivy-action@a9bc513ea7989e3234b395cafb8ed5ccc3755636 # 0.34.1
       with: 
         image-ref: ghcr.io/doodlescheduling/growthbook-controller:latest
         format: json
