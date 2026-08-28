@@ -84,7 +84,7 @@ var _ = BeforeSuite(func() {
 	err = (&GrowthbookInstanceReconciler{
 		Client:           k8sManager.GetClient(),
 		Scheme:           k8sManager.GetScheme(),
-		Recorder:         k8sManager.GetEventRecorderFor("GrowthbookInstance"),
+		Recorder:         k8sManager.GetEventRecorder("GrowthbookInstance"),
 		DatabaseProvider: MockProvider,
 	}).SetupWithManager(k8sManager, GrowthbookInstanceReconcilerOptions{})
 	Expect(err).ToNot(HaveOccurred())

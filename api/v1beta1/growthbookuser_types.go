@@ -69,5 +69,5 @@ type GrowthbookUserList struct {
 }
 
 func init() {
-	SchemeBuilder.Register(&GrowthbookUser{}, &GrowthbookUserList{})
+	objectTypes = append(objectTypes, &GrowthbookUser{}, &GrowthbookUserList{})
 }

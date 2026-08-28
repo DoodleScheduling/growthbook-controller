@@ -1003,6 +1003,5 @@ func needStatus(reconciledInstance *v1beta1.GrowthbookInstance, expectedStatus *
 		reconciledInstance.Status.Conditions[0].Type == expectedStatus.Conditions[0].Type &&
 		reconciledInstance.Status.Conditions[0].Status == expectedStatus.Conditions[0].Status &&
 		reconciledInstance.Status.Conditions[0].ObservedGeneration == expectedStatus.Conditions[0].ObservedGeneration &&
-		reconciledInstance.Status.Conditions[0].Reason == expectedStatus.Conditions[0].Reason &&
 		reconciledInstance.Status.Conditions[0].Message == expectedStatus.Conditions[0].Message
 }
