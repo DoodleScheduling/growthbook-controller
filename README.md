@@ -1,4 +1,4 @@
-# growthbook-controller - Managing growthbook resources
+# growthbook-controller - Managing Growthbook resources
 
 [![release](https://img.shields.io/github/release/DoodleScheduling/growthbook-controller/all.svg)](https://github.com/DoodleScheduling/growthbook-controller/releases)
 [![release](https://github.com/doodlescheduling/growthbook-controller/actions/workflows/release.yaml/badge.svg)](https://github.com/doodlescheduling/growthbook-controller/actions/workflows/release.yaml)
@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/DoodleScheduling/growthbook-controller/badge.svg?branch=master)](https://coveralls.io/github/DoodleScheduling/growthbook-controller?branch=master)
 [![license](https://img.shields.io/github/license/DoodleScheduling/growthbook-controller.svg)](https://github.com/DoodleScheduling/growthbook-controller/blob/master/LICENSE)
 
-Kubernetes controller for managing growthbook.
+Kubernetes controller for managing [Growthbook](https://github.com/growthbook/growthbook).
 
 Currently supported are `GrowthbookOrganization`, `GrowthbookUser`, `GrowthbookFeature`, `GrowthbookClient` and `GrowthbookInstance` while the later one is the main resource
 referencing all other resources while organizations select further resources including clients, features and users (organization membership).

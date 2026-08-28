@@ -279,7 +279,7 @@ func (r *GrowthbookInstanceReconciler) Reconcile(ctx context.Context, req ctrl.R
 	instance.Status.ObservedGeneration = instance.GetGeneration()
 
 	if err != nil {
-		r.Recorder.Eventf(&instance, nil, corev1.EventTypeNormal, "Error", "Reconcile", "failed to reconcile: %s", err.Error())
+		r.Recorder.Eventf(&instance, nil, corev1.EventTypeWarning, "Error", "Reconcile", "failed to reconcile: %s", err.Error())
 		res = ctrl.Result{Requeue: true}
 		instance = v1beta1.GrowthbookInstanceNotReady(instance, v1beta1.FailedReason, err.Error())
 	} else {
