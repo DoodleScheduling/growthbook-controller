@@ -150,7 +150,7 @@ func main() {
 		Client:           mgr.GetClient(),
 		Log:              ctrl.Log.WithName("controllers").WithName("GrowthbookInstance"),
 		Scheme:           mgr.GetScheme(),
-		Recorder:         mgr.GetEventRecorderFor("GrowthbookInstance"),
+		Recorder:         mgr.GetEventRecorder("GrowthbookInstance"),
 		DatabaseProvider: controllers.MongoDBProvider,
 	}
 

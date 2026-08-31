@@ -1,19 +1,18 @@
-# growthbook-controller - Managing growthbook resources
+# growthbook-controller - Managing Growthbook resources
 
 [![release](https://img.shields.io/github/release/DoodleScheduling/growthbook-controller/all.svg)](https://github.com/DoodleScheduling/growthbook-controller/releases)
 [![release](https://github.com/doodlescheduling/growthbook-controller/actions/workflows/release.yaml/badge.svg)](https://github.com/doodlescheduling/growthbook-controller/actions/workflows/release.yaml)
-[![report](https://goreportcard.com/badge/github.com/DoodleScheduling/growthbook-controller)](https://goreportcard.com/report/github.com/DoodleScheduling/growthbook-controller)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/DoodleScheduling/growthbook-controller/badge)](https://api.securityscorecards.dev/projects/github.com/DoodleScheduling/growthbook-controller)
 [![Coverage Status](https://coveralls.io/repos/github/DoodleScheduling/growthbook-controller/badge.svg?branch=master)](https://coveralls.io/github/DoodleScheduling/growthbook-controller?branch=master)
 [![license](https://img.shields.io/github/license/DoodleScheduling/growthbook-controller.svg)](https://github.com/DoodleScheduling/growthbook-controller/blob/master/LICENSE)
 
-Kubernetes controller for managing growthbook.
+Kubernetes controller for managing [Growthbook](https://github.com/growthbook/growthbook).
 
 Currently supported are `GrowthbookOrganization`, `GrowthbookUser`, `GrowthbookFeature`, `GrowthbookClient` and `GrowthbookInstance` while the later one is the main resource
 referencing all other resources while organizations select further resources including clients, features and users (organization membership).
 Basically for deploying features and clients a `GrowthbookInstance` as well as at least one `GrowthbookOrganization` resource needs to be created.
 
-This controller does not deploy growthbook itself. It manages resources for an existing growthbook instance.
+This controller does not deploy Growthbook itself. It manages resources for an existing Growthbook instance.
 Growthbook currently does not support managing features nor clients within the scope of the rest api. This controller 
 bypasses their api and manages the resources on MongoDB directly.
 
@@ -24,8 +23,8 @@ bypasses their api and manages the resources on MongoDB directly.
 ## Example Usage
 
 The following manifests configure:
-* A reference to an existing growthbook instance (mongodb)
-* A growthbook org called `my-org`
+* A reference to an existing Growthbook instance (mongodb)
+* A Growthbook org called `my-org`
 * An admin user called `admin` and assigned to `my-org` as admin with the password `password`
 * Two features assigned to the org `my-org`
 * A Client SDK connection assigned to the org `my-org` with the token `token`

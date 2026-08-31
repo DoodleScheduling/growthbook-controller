@@ -33,7 +33,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -57,6 +57,7 @@ import (
 // +kubebuilder:rbac:groups=growthbook.infra.doodle.com,resources=growthbookclients,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups="",resources=secrets,verbs=get;list;watch
 // +kubebuilder:rbac:groups="",resources=events,verbs=create;patch
+// +kubebuilder:rbac:groups=events.k8s.io,resources=events,verbs=create;patch
 
 const (
 	secretIndexKey = ".metadata.secret"
@@ -97,7 +98,7 @@ type GrowthbookInstanceReconciler struct {
 	client.Client
 	Log              logr.Logger
 	Scheme           *runtime.Scheme
-	Recorder         record.EventRecorder
+	Recorder         events.EventRecorder
 	DatabaseProvider func(ctx context.Context, instance v1beta1.GrowthbookInstance, username, password string) (storage.Disconnector, storage.Database, error)
 }
 
@@ -278,7 +279,7 @@ func (r *GrowthbookInstanceReconciler) Reconcile(ctx context.Context, req ctrl.R
 	instance.Status.ObservedGeneration = instance.GetGeneration()
 
 	if err != nil {
-		r.Recorder.Event(&instance, "Normal", "error", err.Error())
+		r.Recorder.Eventf(&instance, nil, corev1.EventTypeWarning, "Error", "Reconcile", "failed to reconcile: %s", err.Error())
 		res = ctrl.Result{Requeue: true}
 		instance = v1beta1.GrowthbookInstanceNotReady(instance, v1beta1.FailedReason, err.Error())
 	} else {
@@ -296,9 +297,7 @@ func (r *GrowthbookInstanceReconciler) Reconcile(ctx context.Context, req ctrl.R
 			}
 		}
 
-		msg := "instance successfully reconciled"
-		r.Recorder.Event(&instance, "Normal", "info", msg)
-		instance = v1beta1.GrowthbookInstanceReady(instance, v1beta1.SynchronizedReason, msg)
+		instance = v1beta1.GrowthbookInstanceReady(instance, v1beta1.SynchronizedReason, "instance successfully reconciled")
 	}
 
 	// Update status after reconciliation.
