@@ -3,15 +3,5 @@ kind: Kustomization
 
 resources:
 - root-secret.yaml
-
-helmCharts:
-- repo: https://charts.bitnami.com/bitnami
-  name: mongodb
-  version: 13.10.2
-  releaseName: mongodb
-  namespace: growthbook-system
-  valuesInline:
-    persistence:
-      enabled: false
-    auth:
-      rootPassword: password
+- statefulset.yaml
+- service.yaml
