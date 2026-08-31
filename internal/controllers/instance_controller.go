@@ -700,7 +700,9 @@ func updateResourceCatalog(instance v1beta1.GrowthbookInstance, resource client.
 		APIVersion: fmt.Sprintf("%s/%s", resource.GetObjectKind().GroupVersionKind().Group, resource.GetObjectKind().GroupVersionKind().Version),
 	}
 
-	if !slices.Contains(instance.Status.SubResourceCatalog, resRef) {
+	if !slices.ContainsFunc(instance.Status.SubResourceCatalog, func(ref v1beta1.ResourceReference) bool {
+		return ref == resRef
+	}) {
 		instance.Status.SubResourceCatalog = append(instance.Status.SubResourceCatalog, resRef)
 	}
 
