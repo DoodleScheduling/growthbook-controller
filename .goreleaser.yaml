@@ -77,25 +77,20 @@ docker_manifests:
 
 signs:
 - cmd: cosign
-  certificate: "${artifact}.pem"
-  env:
-  - COSIGN_EXPERIMENTAL=1
+  signature: "${artifact}.sigstore.json"
   args:
   - sign-blob
-  - "--output-certificate=${certificate}"
-  - "--output-signature=${signature}"
-  - "${artifact}"
+  - "--bundle=${signature}"
   - --yes
+  - "${artifact}"
   artifacts: checksum
   output: true
 
 docker_signs:
   - cmd: cosign
-    env:
-    - COSIGN_EXPERIMENTAL=1
     artifacts: all
     output: true
     args:
     - 'sign'
-    - '${artifact}'
     - --yes
+    - '${artifact}'
