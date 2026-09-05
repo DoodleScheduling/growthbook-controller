@@ -280,7 +280,7 @@ func (r *GrowthbookInstanceReconciler) Reconcile(ctx context.Context, req ctrl.R
 
 	if err != nil {
 		r.Recorder.Eventf(&instance, nil, corev1.EventTypeWarning, "Error", "Reconcile", "failed to reconcile: %s", err.Error())
-		res = ctrl.Result{Requeue: true}
+		res = ctrl.Result{RequeueAfter: time.Millisecond}
 		instance = v1beta1.GrowthbookInstanceNotReady(instance, v1beta1.FailedReason, err.Error())
 	} else {
 		if !instance.DeletionTimestamp.IsZero() {
@@ -303,7 +303,7 @@ func (r *GrowthbookInstanceReconciler) Reconcile(ctx context.Context, req ctrl.R
 	// Update status after reconciliation.
 	if err := r.patchStatus(ctx, &instance); err != nil {
 		logger.Error(err, "unable to update status after reconciliation")
-		return ctrl.Result{Requeue: true}, err
+		return ctrl.Result{}, err
 	}
 
 	return res, err
@@ -700,7 +700,9 @@ func updateResourceCatalog(instance v1beta1.GrowthbookInstance, resource client.
 		APIVersion: fmt.Sprintf("%s/%s", resource.GetObjectKind().GroupVersionKind().Group, resource.GetObjectKind().GroupVersionKind().Version),
 	}
 
-	if !slices.Contains(instance.Status.SubResourceCatalog, resRef) {
+	if !slices.ContainsFunc(instance.Status.SubResourceCatalog, func(ref v1beta1.ResourceReference) bool {
+		return ref == resRef
+	}) {
 		instance.Status.SubResourceCatalog = append(instance.Status.SubResourceCatalog, resRef)
 	}
 
