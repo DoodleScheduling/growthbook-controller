@@ -8,7 +8,7 @@ require (
 	github.com/onsi/ginkgo/v2 v2.33.0
 	github.com/onsi/gomega v1.43.1
 	github.com/spf13/pflag v1.0.10
-	go.mongodb.org/mongo-driver v1.17.10
+	go.mongodb.org/mongo-driver/v2 v2.9.1
 	golang.org/x/crypto v0.57.0
 	golang.org/x/exp v0.0.0-20260824195058-e88cd73687aa
 	k8s.io/api v0.37.0
